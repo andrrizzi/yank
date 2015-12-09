@@ -356,7 +356,7 @@ def test_yaml_mol2_antechamber():
         yaml_builder = YamlBuilder(textwrap.dedent(yaml_content))
         yaml_builder._db._setup_molecules('benzene')
 
-        output_dir = os.path.join(tmp_dir, YamlBuilder.MOLECULES_DIR, 'benzene')
+        output_dir = os.path.join(tmp_dir, SetupDatabase.MOLECULES_DIR, 'benzene')
         gaff_path = os.path.join(output_dir, 'benzene.gaff.mol2')
         frcmod_path = os.path.join(output_dir, 'benzene.frcmod')
 
@@ -407,7 +407,7 @@ def test_setup_name_smiles_antechamber():
         yaml_builder._db._setup_molecules('toluene', 'benzene', 'p-xylene')
 
         for mol in ['toluene', 'p-xylene']:
-            output_dir = os.path.join(tmp_dir, YamlBuilder.MOLECULES_DIR, mol)
+            output_dir = os.path.join(tmp_dir, SetupDatabase.MOLECULES_DIR, mol)
             assert os.path.exists(os.path.join(output_dir, mol + '.mol2'))
             assert os.path.exists(os.path.join(output_dir, mol + '.gaff.mol2'))
             assert os.path.exists(os.path.join(output_dir, mol + '.frcmod'))
@@ -416,7 +416,7 @@ def test_setup_name_smiles_antechamber():
             assert os.path.getsize(os.path.join(output_dir, mol + '.frcmod')) > 0
 
         # Test that molecules do not overlap
-        toluene_path = os.path.join(tmp_dir, YamlBuilder.MOLECULES_DIR,
+        toluene_path = os.path.join(tmp_dir, SetupDatabase.MOLECULES_DIR,
                                     'toluene', 'toluene.gaff.mol2')
         toluene_pos = utils.get_oe_mol_positions(utils.read_oe_molecule(toluene_path))
         benzene_pos = utils.get_oe_mol_positions(utils.read_oe_molecule(benzene_path))
@@ -468,7 +468,7 @@ def test_epik_enumeration():
         yaml_builder = YamlBuilder(textwrap.dedent(yaml_content))
         yaml_builder._db._setup_molecules('benzene')
 
-        output_dir = os.path.join(tmp_dir, YamlBuilder.MOLECULES_DIR, 'benzene')
+        output_dir = os.path.join(tmp_dir, SetupDatabase.MOLECULES_DIR, 'benzene')
         assert os.path.exists(os.path.join(output_dir, 'benzene-epik.mol2'))
         assert os.path.getsize(os.path.join(output_dir, 'benzene-epik.mol2')) > 0
 
